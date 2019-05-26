@@ -1,10 +1,11 @@
 from rest_framework import generics, status
 from rest_framework.response import Response
-from rest_auth.views import LoginView as RestLoginView, LogoutView as RestLogoutView
+from rest_auth.views import LoginView as RestLoginView, LogoutView as RestLogoutView, PasswordResetView as RestAuthPasswordResetView, PasswordChangeView as RestAuthPasswordChangeView
 from rest_framework.permissions import AllowAny
 
 
-from .permissions import LoggedPermission, CreateUserPermission
+
+from .permissions import LoggedPermission, CreateUserPermission, LoginPermission
 from .serializers import UserSerializer, AccountsSerializer, VeterinaryDoctorsSerializer, LoginSerializer
 from .models import MyUser, VeterinaryDoctor
 
@@ -97,7 +98,7 @@ class LoginView(RestLoginView):
                                  """
     queryset = MyUser.objects.all()
     serializer_class = LoginSerializer
-    permission_classes = (CreateUserPermission,)
+    permission_classes = (LoginPermission,)
 
 
 class LogoutView(RestLogoutView):
@@ -109,3 +110,19 @@ class LogoutView(RestLogoutView):
                                      """
 
     permission_classes = (LoggedPermission,)
+
+
+class PasswordChangeView(RestAuthPasswordChangeView):
+    """
+    This view inherits the Django PasswordChangeView.
+    """
+
+    permission_classes = (LoggedPermission,)
+
+
+class PasswordResetView(RestAuthPasswordResetView):
+    """
+       This view inherits the Django PasswordResetView.
+       """
+
+    permission_classes = (AllowAny,)

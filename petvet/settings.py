@@ -20,7 +20,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '*@&&uv&vir_%rxyjjh4(@fai1kc6iuxnkz@67@mt@kngj0uh&g'
+SECRET_KEY = 'ow005@fhc6j63oip4&_rdi*nrsr6se!_-h1vk%q__&0#*)tna#'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -37,7 +37,25 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    'rest_framework',
+
+    'rest_framework.authtoken',
+    'rest_auth',
+
+    'django.contrib.sites',
+    'allauth',
+    'allauth.account',
+    'rest_auth.registration',
+    'allauth.socialaccount',
+
+    'accounts',
+    'animals',
 ]
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+SITE_ID = 1
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -118,3 +136,14 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
+
+
+AUTH_USER_MODEL = 'accounts.MyUser'
+
+REST_AUTH_SERIALIZERS = {'LOGIN_SERIALIZER': 'accounts.serializers.LoginSerializer'}
+
+ACCOUNT_AUTHENTICATION_METHOD = 'username'
+
+ACCOUNT_USERNAME_REQUIRED = True
+
+

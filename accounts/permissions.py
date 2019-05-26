@@ -21,6 +21,25 @@ class CreateUserPermission(BasePermission):
             return True
 
 
+class LoginPermission(BasePermission):
+    """
+           This permission inherits the Django Base Permission.
+           It allows only not Logged users,
+           super or staff users to register new user.
+
+           """
+
+    def has_permission(self, request, view):
+        """
+                     This function is an override of the
+                     has_permission function so that
+                     it provides access only to non logged users,
+                     or only to superusers and staff.
+
+                     """
+        if not request.user.is_authenticated:
+            return True
+
 class LoggedPermission(BasePermission):
     """
         This permission inherits the Django Base Permission.

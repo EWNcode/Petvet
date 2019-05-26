@@ -24,15 +24,18 @@ class Animal(models.Model):
     gender = models.CharField(max_length=6, choices=[(gender.name, gender.value) for gender in Gender])
     kind = models.CharField(max_length=3, choices=[(kind.name, kind.value) for kind in AnimalKind])
     birthday = models.DateField()
-    serial_number = models.CharField(validators=[serial_number], max_length=10, unique=True)
+    serial_number = models.CharField(validators=[serial_number], max_length=10)
     general_information = models.TextField(null=True, blank=True)
     owner = models.ForeignKey(MyUser, on_delete=models.CASCADE)
-    vaccine_1 = models.BooleanField(null=True)
-    vaccine_1_date = models.DateField(null=True)
-    vaccine_2 = models.BooleanField(null=True)
-    vaccine_2_date = models.DateField(null=True)
-    vaccine_3 = models.BooleanField(null=True)
-    vaccine_3_date = models.DateField(null=True)
-    vaccine_4 = models.BooleanField(null=True)
-    vaccine_4_date = models.DateField(null=True)
+    vaccine_1 = models.BooleanField(null=True, blank=True)
+    vaccine_1_date = models.DateField(null=True, blank=True)
+    vaccine_2 = models.BooleanField(null=True, blank=True)
+    vaccine_2_date = models.DateField(null=True, blank=True)
+    vaccine_3 = models.BooleanField(null=True, blank=True)
+    vaccine_3_date = models.DateField(null=True, blank=True)
+    vaccine_4 = models.BooleanField(null=True, blank=True)
+    vaccine_4_date = models.DateField(null=True, blank=True)
+
+    def __str__(self):
+        return f'{self.kind} {self.name}'
 
