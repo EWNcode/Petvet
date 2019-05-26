@@ -6,6 +6,9 @@ from accounts.models import MyUser
 
 
 class AnimalCreation(TestCase):
+    """
+    Test for auto Animal creation
+    """
     def set_up_data(self):
         user = MyUser.objects.create_user(username="aloalo", password="password", email="abc@testmail.com", name='Ivan',
                                           surname='Ivanov', city='Sofia')
